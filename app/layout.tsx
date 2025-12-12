@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Malek Badreddine | Portfolio",
+  title: "Melek BADREDDINE | Portfolio",
   description:
     "Computer Engineer specialized in Cloud, DevOps & Systems. Building modern applications with focus on performance and user experience.",
   keywords:
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://malek-badreddine.com",
-    siteName: "Malek Badreddine",
+    url: "https://melekbadreddine.com",
+    siteName: "Melek BADREDDINE",
   },
 };
 

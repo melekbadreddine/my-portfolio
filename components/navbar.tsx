@@ -19,7 +19,7 @@ export function Navbar() {
             href="/"
             className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
           >
-            Malek
+            Portfolio
           </Link>
 
           {/* Desktop Navigation */}

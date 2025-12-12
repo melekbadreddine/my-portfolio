@@ -9,14 +9,13 @@ export default function Home() {
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center space-y-6 pt-10 md:pt-20">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          Malek BADREDDINE
+          Melek BADREDDINE
         </h1>
         <h2 className="text-2xl font-semibold text-muted-foreground sm:text-3xl">
-          Computer Engineer | Cloud & DevOps
+          Junior Computer Engineer | Cloud & DevOps
         </h2>
         <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-          Specialized in building scalable infrastructure, automating CI/CD pipelines, and ensuring system reliability. 
-          Bridging the gap between development and operations with modern cloud-native technologies.
+          🎓 Recently graduated from the National School of Engineers of Sfax (ENIS), I am eager to contribute to innovative projects in Cloud, DevOps, Observability, and AI-driven systems, leveraging my technical expertise and passion for continuous improvement.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Button asChild size="lg">
@@ -41,12 +40,12 @@ export default function Home() {
         <div className="flex justify-center">
           {/* Using Skill Icons API */}
           <img 
-            src="https://go-skill-icons.vercel.app/api/icons?i=windows,wsl,linux,bash,ubuntu,neovim,vscode,git,gitlab,html,css,js,c,cpp,java,python,go,ts,nodejs,tailwind,angular,spring,flutter,dart,swagger,postman,mysql,postgresql,mongodb,firebase,redis,numpy,pandas,matplotlib,tensorflow,azure,aws,cloudflare,nginx,docker,kubernetes,helm,terraform,ansible,githubactions,jenkins,argocd,n8n,opentelemetry,prometheus,grafana,jaeger&perline=8" 
+            src="https://go-skill-icons.vercel.app/api/icons?i=windows,linux,bash,ubuntu,catppuccin,neovim,vscode,git,gitlab,jira,confluence,html,css,js,java,python,go,ts,nodejs,tailwind,angular,spring,swagger,postgresql,mongodb,redis,numpy,pandas,matplotlib,tensorflow,crewai,azure,aws,nginx,docker,kubernetes,helm,terraform,ansible,githubactions,jenkins,argocd,n8n,opentelemetry,prometheus,grafana,jaeger&perline=8" 
             alt="My Skills"
             className="hidden md:block"
           />
            <img 
-            src="https://go-skill-icons.vercel.app/api/icons?i=windows,wsl,linux,bash,ubuntu,neovim,vscode,git,gitlab,html,css,js,c,cpp,java,python,go,ts,nodejs,tailwind,angular,spring,flutter,dart,swagger,postman,mysql,postgresql,mongodb,firebase,redis,numpy,pandas,matplotlib,tensorflow,azure,aws,cloudflare,nginx,docker,kubernetes,helm,terraform,ansible,githubactions,jenkins,argocd,n8n,opentelemetry,prometheus,grafana,jaeger&perline=4" 
+            src="https://go-skill-icons.vercel.app/api/icons?i=windows,linux,bash,ubuntu,catppuccin,neovim,vscode,git,gitlab,jira,confluence,html,css,js,java,python,go,ts,nodejs,tailwind,angular,spring,swagger,postgresql,mongodb,redis,numpy,pandas,matplotlib,tensorflow,crewai,azure,aws,nginx,docker,kubernetes,helm,terraform,ansible,githubactions,jenkins,argocd,n8n,opentelemetry,prometheus,grafana,jaeger&perline=4" 
             alt="My Skills"
             className="block md:hidden"
           />

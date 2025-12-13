@@ -125,35 +125,35 @@ export default function Home() {
           </p>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <ProjectCard 
-            title="Microservices Observability"
-            description="Implemented a complete observability stack for containerized microservices using OpenTelemetry, Grafana, Loki, and Tempo."
-            tags={["Kubernetes", "OpenTelemetry", "Grafana", "Terraform"]}
+          <ProjectCard
+            title="AWS Infrastructure Automation and CI/CD Pipeline"
+            description="• Automated the provisioning of a complete AWS infrastructure using Terraform and Ansible\n• Implemented remote Terraform state management using Amazon S3 with DynamoDB state locking\n• Built a CI/CD pipeline with Jenkins to automate build, test, and deployment workflows\n• Managed container images using Amazon ECR and deployed applications on EC2 instances"
+            tags={["Terraform", "Ansible", "Docker Compose", "Jenkins", "AWS IAM", "VPC", "EC2", "S3", "RDS", "ECR", "DynamoDB"]}
           />
-          <ProjectCard 
-            title="DevSecOps Platform"
-            description="Automated infrastructure provisioning and CI/CD pipelines integrating security scanning with Trivy and SonarQube."
-            tags={["Jenkins", "ArgoCD", "Azure", "Docker"]}
+          <ProjectCard
+            title="Microservices Deployment and Service Mesh with Istio"
+            description="• Deployed a microservices-based architecture on Kubernetes with Istio service mesh integration\n• Managed and observed service-to-service communication, traffic flow, and latency\n• Monitored system performance and service dependencies using Kiali, Jaeger, and Grafana\n• Implemented GitOps-based deployments using ArgoCD"
+            tags={["Kubernetes", "Istio", "ArgoCD", "Kiali", "Jaeger", "Grafana"]}
           />
-          <ProjectCard 
-            title="AI-Powered CBT Platform"
-            description="Cross-platform mobile & web app for mental health support, containerized and deployed on AKS with Generative AI integration."
-            tags={["Flutter", "Python/Flask", "Azure AKS", "OpenAI"]}
+          <ProjectCard
+            title="DevOps Capstone Project (Coursera)"
+            description="• Developed RESTful APIs using Flask, applying Test-Driven Development (TDD) principles\n• Containerized the application and deployed it on OpenShift (Kubernetes)\n• Built CI/CD pipelines using GitHub Actions and Tekton to automate testing and deployment\n• Applied Agile/Kanban practices for task tracking and delivery"
+            tags={["Flask", "GitHub Actions", "Docker", "OpenShift", "Tekton", "Kanban"]}
           />
-           <ProjectCard 
-            title="Distributed Data Processing"
-            description="Big Data pipeline using Hadoop MapReduce and Spark on Databricks for parallel processing of large datasets."
-            tags={["Spark", "Hadoop", "Databricks", "Java"]}
+          <ProjectCard
+            title="Laboratory Management Microservices Application"
+            description="• Designed and implemented a distributed microservices architecture with service discovery via Eureka\n• Implemented secure authentication and authorization using OAuth 2.0 and JWT\n• Containerized and deployed services using Docker\n• Developed an Angular front-end for real-time data management and visualization"
+            tags={["Spring Boot", "Angular", "TypeScript", "PostgreSQL", "Firebase", "Eureka", "JWT", "OAuth 2.0", "Docker"]}
           />
-          <ProjectCard 
-            title="AWS Infra Automation"
-            description="Automated AWS infrastructure deployment (VPC, EC2, RDS) using Terraform and Ansible with Jenkins CI/CD."
-            tags={["AWS", "Terraform", "Ansible", "Jenkins"]}
+          <ProjectCard
+            title="Hybrid Windows & Linux Network Administration"
+            description="• Virtualized Windows and Linux servers using VMware\n• Configured Active Directory, DNS, and DHCP in a Windows Server environment\n• Designed and secured the network using pfSense, including NAT rules and network segmentation\n• Implemented file sharing and access control between Windows and Linux systems using Samba"
+            tags={["VMware", "Windows Server", "Active Directory", "DHCP", "DNS", "Ubuntu", "Samba", "pfSense"]}
           />
-          <ProjectCard 
-            title="Smart Parking DApp"
-            description="Decentralized application for parking reservation using Ethereum smart contracts and AI license plate recognition."
-            tags={["Blockchain", "Solidity", "TensorFlow", "YOLO"]}
+          <ProjectCard
+            title="IoT System Implementation with Node-RED and MQTT"
+            description="• Built a basic IoT system using Node-RED to connect devices and services\n• Implemented real-time messaging using the MQTT protocol with a Mosquitto broker\n• Stored and visualized data in Firebase and Node-RED dashboards\n• Tested IoT APIs and data flows using Postman"
+            tags={["Node-RED", "MQTT", "Mosquitto", "Firebase", "JavaScript", "Postman"]}
           />
         </div>
       </section>

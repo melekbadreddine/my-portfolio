@@ -68,7 +68,7 @@ export default function Home() {
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div className="flex items-center gap-4">
                     <Avatar className="h-12 w-12 border">
-                      <AvatarImage src={`/logos/${job.company.toLowerCase().replace(/ /g, "-")}.png`} alt={job.company} />
+                      <AvatarImage src={`/logos/exp/${job.company.toLowerCase().replace(/ /g, "-")}.png`} alt={job.company} />
                       <AvatarFallback className="font-bold">{job.logoFallback}</AvatarFallback>
                     </Avatar>
                     <div>
@@ -167,7 +167,7 @@ export default function Home() {
                     <CardHeader>
                         <div className="flex items-center gap-4">
                             <Avatar className="h-12 w-12 border">
-                                <AvatarImage src={`/logos/${edu.logoFallback.toLowerCase()}.png`} alt={edu.school} />
+                                <AvatarImage src={`/logos/edu/${edu.logoFallback.toLowerCase()}.png`} alt={edu.school} />
                                 <AvatarFallback className="font-bold">{edu.logoFallback}</AvatarFallback>
                             </Avatar>
                             <div>

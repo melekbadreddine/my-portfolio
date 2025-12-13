@@ -27,6 +27,11 @@ export default function Home() {
               <Github className="mr-2 h-4 w-4" /> GitHub
             </Link>
           </Button>
+          <Button asChild size="lg">
+            <a href="/Resume_Melek_BADREDDINE.pdf" download>
+              Download Resume
+            </a>
+          </Button>
         </div>
       </section>
 
@@ -67,7 +72,7 @@ export default function Home() {
               <CardHeader>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <Avatar className="h-12 w-12 border">
+                    <Avatar className="h-12 w-12 border rounded-none">
                       <AvatarImage src={`/logos/exp/${job.company.toLowerCase().replace(/ /g, "-")}.png`} alt={job.company} />
                       <AvatarFallback className="font-bold">{job.logoFallback}</AvatarFallback>
                     </Avatar>
@@ -166,7 +171,7 @@ export default function Home() {
                 <Card key={index} className="flex flex-col">
                     <CardHeader>
                         <div className="flex items-center gap-4">
-                            <Avatar className="h-12 w-12 border">
+                            <Avatar className="h-12 w-12 border rounded-none">
                                 <AvatarImage src={`/logos/edu/${edu.logoFallback.toLowerCase()}.png`} alt={edu.school} />
                                 <AvatarFallback className="font-bold">{edu.logoFallback}</AvatarFallback>
                             </Avatar>

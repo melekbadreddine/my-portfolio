@@ -13,10 +13,7 @@ export default {
       }
       return session
     },
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user
-      const isGuestbookAction = nextUrl.pathname.startsWith("/guestbook") && nextUrl.pathname !== "/guestbook" // Protect specific actions if needed
-      
+    authorized() {
       // We are leaving the guestbook page public, but we can protect sub-routes or actions
       // For now, let the page handle the "Sign In" UI state
       return true 

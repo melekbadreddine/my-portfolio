@@ -128,32 +128,62 @@ export default function Home() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           <ProjectCard
             title="AWS Infrastructure Automation and CI/CD Pipeline"
-            description="• Automated the provisioning of a complete AWS infrastructure using Terraform and Ansible\n• Implemented remote Terraform state management using Amazon S3 with DynamoDB state locking\n• Built a CI/CD pipeline with Jenkins to automate build, test, and deployment workflows\n• Managed container images using Amazon ECR and deployed applications on EC2 instances"
+            description={[
+              "Automated the provisioning of a complete AWS infrastructure using Terraform and Ansible",
+              "Implemented remote Terraform state management using Amazon S3 with DynamoDB state locking",
+              "Built a CI/CD pipeline with Jenkins to automate build, test, and deployment workflows",
+              "Managed container images using Amazon ECR and deployed applications on EC2 instances",
+            ]}
             tags={["Terraform", "Ansible", "Docker Compose", "Jenkins", "AWS IAM", "VPC", "EC2", "S3", "RDS", "ECR", "DynamoDB"]}
           />
           <ProjectCard
             title="Microservices Deployment and Service Mesh with Istio"
-            description="• Deployed a microservices-based architecture on Kubernetes with Istio service mesh integration\n• Managed and observed service-to-service communication, traffic flow, and latency\n• Monitored system performance and service dependencies using Kiali, Jaeger, and Grafana\n• Implemented GitOps-based deployments using ArgoCD"
+            description={[
+              "Deployed a microservices-based architecture on Kubernetes with Istio service mesh integration",
+              "Managed and observed service-to-service communication, traffic flow, and latency",
+              "Monitored system performance and service dependencies using Kiali, Jaeger, and Grafana",
+              "Implemented GitOps-based deployments using ArgoCD",
+            ]}
             tags={["Kubernetes", "Istio", "ArgoCD", "Kiali", "Jaeger", "Grafana"]}
           />
           <ProjectCard
             title="DevOps Capstone Project (Coursera)"
-            description="• Developed RESTful APIs using Flask, applying Test-Driven Development (TDD) principles\n• Containerized the application and deployed it on OpenShift (Kubernetes)\n• Built CI/CD pipelines using GitHub Actions and Tekton to automate testing and deployment\n• Applied Agile/Kanban practices for task tracking and delivery"
+            description={[
+              "Developed RESTful APIs using Flask, applying Test-Driven Development (TDD) principles",
+              "Containerized the application and deployed it on OpenShift (Kubernetes)",
+              "Built CI/CD pipelines using GitHub Actions and Tekton to automate testing and deployment",
+              "Applied Agile/Kanban practices for task tracking and delivery",
+            ]}
             tags={["Flask", "GitHub Actions", "Docker", "OpenShift", "Tekton", "Kanban"]}
           />
           <ProjectCard
             title="Laboratory Management Microservices Application"
-            description="• Designed and implemented a distributed microservices architecture with service discovery via Eureka\n• Implemented secure authentication and authorization using OAuth 2.0 and JWT\n• Containerized and deployed services using Docker\n• Developed an Angular front-end for real-time data management and visualization"
+            description={[
+              "Designed and implemented a distributed microservices architecture with service discovery via Eureka",
+              "Implemented secure authentication and authorization using OAuth 2.0 and JWT",
+              "Containerized and deployed services using Docker",
+              "Developed an Angular front-end for real-time data management and visualization",
+            ]}
             tags={["Spring Boot", "Angular", "TypeScript", "PostgreSQL", "Firebase", "Eureka", "JWT", "OAuth 2.0", "Docker"]}
           />
           <ProjectCard
             title="Hybrid Windows & Linux Network Administration"
-            description="• Virtualized Windows and Linux servers using VMware\n• Configured Active Directory, DNS, and DHCP in a Windows Server environment\n• Designed and secured the network using pfSense, including NAT rules and network segmentation\n• Implemented file sharing and access control between Windows and Linux systems using Samba"
+            description={[
+              "Virtualized Windows and Linux servers using VMware",
+              "Configured Active Directory, DNS, and DHCP in a Windows Server environment",
+              "Designed and secured the network using pfSense, including NAT rules and network segmentation",
+              "Implemented file sharing and access control between Windows and Linux systems using Samba",
+            ]}
             tags={["VMware", "Windows Server", "Active Directory", "DHCP", "DNS", "Ubuntu", "Samba", "pfSense"]}
           />
           <ProjectCard
             title="IoT System Implementation with Node-RED and MQTT"
-            description="• Built a basic IoT system using Node-RED to connect devices and services\n• Implemented real-time messaging using the MQTT protocol with a Mosquitto broker\n• Stored and visualized data in Firebase and Node-RED dashboards\n• Tested IoT APIs and data flows using Postman"
+            description={[
+              "Built a basic IoT system using Node-RED to connect devices and services",
+              "Implemented real-time messaging using the MQTT protocol with a Mosquitto broker",
+              "Stored and visualized data in Firebase and Node-RED dashboards",
+              "Tested IoT APIs and data flows using Postman",
+            ]}
             tags={["Node-RED", "MQTT", "Mosquitto", "Firebase", "JavaScript", "Postman"]}
           />
         </div>
@@ -249,14 +279,18 @@ export default function Home() {
   )
 }
 
-function ProjectCard({ title, description, tags }: { title: string, description: string, tags: string[] }) {
+function ProjectCard({ title, description, tags }: { title: string, description: string[], tags: string[] }) {
   return (
     <Card className="flex flex-col h-full hover:shadow-lg transition-shadow">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-1">
-        <p className="text-sm text-muted-foreground whitespace-pre-line">{description}</p>
+        <ul className="list-disc list-inside text-sm text-muted-foreground">
+          {description.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
         <div className="flex flex-wrap gap-2 mt-4">
           {tags.map((tag) => (
             <span key={tag} className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">

@@ -1,4 +1,4 @@
-# Malek Badreddine's Portfolio
+# Melek Badreddine's Portfolio
 
 A modern, high-performance personal portfolio application built with **Next.js 15**, **React 18**, **TypeScript**, and **Tailwind CSS**. Features an interactive guestbook, smooth animations, and a complete DevOps deployment pipeline.
 
@@ -48,7 +48,7 @@ cd my-portfolio
 ### 2. Install Dependencies
 
 ```bash
-npm install
+bun install
 ```
 
 ### 3. Configure Environment Variables
@@ -114,7 +114,7 @@ For **Production:**
 ### 8. Run Development Server
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -123,19 +123,19 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ```bash
 # Development
-npm run dev              # Start dev server on port 3000
+bun run dev              # Start dev server on port 3000
 
 # Production
-npm run build           # Build for production
-npm start               # Start production server
+bun run build           # Build for production
+bun start               # Start production server
 
 # Code Quality
-npm run lint            # Run ESLint
-npm run type-check      # Check TypeScript types
+bun run lint            # Run ESLint
+bun run type-check      # Check TypeScript types
 
 # Database
-npm run prisma:migrate  # Create migration
-npm run prisma:generate # Generate Prisma Client
+bun run prisma:migrate  # Create migration
+bun run prisma:generate # Generate Prisma Client
 ```
 
 ## 📂 Project Structure
@@ -320,7 +320,7 @@ Cannot find module '@prisma/client/runtime/...'
 
 **Solution:**
 ```bash
-npm install prisma@^6 @prisma/client@^6
+bun install prisma@^6 @prisma/client@^6
 npx prisma generate
 ```
 

@@ -3,297 +3,349 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Link from "next/link"
-import { ArrowRight, Github, Calendar, MapPin, Building2, GraduationCap, Trophy } from "lucide-react"
+import { ArrowRight, Github, Calendar, MapPin, Building2, GraduationCap, Trophy, Terminal, Rocket, Cpu, Radio } from "lucide-react"
+import { auth } from "@/lib/auth"
+import { db } from "@/lib/db"
+import { GuestbookSection } from "@/components/sections/guestbook-section"
+import { StarField } from "@/components/3d/star-field"
+import { Astronaut } from "@/components/3d/astronaut"
 
-export default function Home() {
+export const dynamic = "force-dynamic"
+
+export default async function Home() {
+  const session = await auth()
+  
+  const entries = await db.guestbookEntry.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      user: true,
+    },
+  })
+
   return (
-    <div className="container py-10 space-y-20">
-      {/* Hero Section */}
-      <section className="flex flex-col items-center text-center space-y-6 pt-10 md:pt-20">
-        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          Melek BADREDDINE
-        </h1>
-        <h2 className="text-2xl font-semibold text-muted-foreground sm:text-3xl">
-          Junior Computer Engineer | Cloud & DevOps
-        </h2>
-        <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-          🎓 Recently graduated from the National School of Engineers of Sfax (ENIS), I am eager to contribute to innovative projects in Cloud, DevOps, Observability, and AI-driven systems, leveraging my technical expertise and passion for continuous improvement.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <Button asChild size="lg">
-            <Link href="/guestbook">Sign Guestbook <ArrowRight className="ml-2 h-4 w-4" /></Link>
-          </Button>
-          <Button variant="outline" size="lg" asChild>
-            <Link href="https://github.com/melekbadreddine" target="_blank">
-              <Github className="mr-2 h-4 w-4" /> GitHub
-            </Link>
-          </Button>
-          <Button asChild size="lg">
-            <a href="/Resume_Melek_BADREDDINE.pdf" download>
-              Download Resume
-            </a>
-          </Button>
-        </div>
-      </section>
+    <div className="relative min-h-screen font-sans">
+      <StarField />
+      
+      <div className="container mx-auto px-4 relative z-10 py-10 space-y-24">
 
-      {/* Skills Section */}
-      <section id="skills" className="space-y-6">
-        <div className="flex flex-col items-center space-y-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Technical Arsenal</h2>
-          <p className="max-w-[700px] text-muted-foreground">
-            Technologies I use to build and deploy robust systems.
-          </p>
-        </div>
-        <div className="flex justify-center">
-          {/* Using Skill Icons API */}
-          <img 
-            src="https://go-skill-icons.vercel.app/api/icons?i=windows,linux,bash,ubuntu,catppuccin,neovim,vscode,git,gitlab,jira,confluence,html,css,js,java,python,go,ts,nodejs,tailwind,angular,spring,swagger,postgresql,mongodb,redis,numpy,pandas,matplotlib,tensorflow,crewai,azure,aws,nginx,docker,kubernetes,helm,terraform,ansible,githubactions,jenkins,argocd,n8n,opentelemetry,prometheus,grafana,jaeger&perline=8" 
-            alt="My Skills"
-            className="hidden md:block"
-          />
-           <img 
-            src="https://go-skill-icons.vercel.app/api/icons?i=windows,linux,bash,ubuntu,catppuccin,neovim,vscode,git,gitlab,jira,confluence,html,css,js,java,python,go,ts,nodejs,tailwind,angular,spring,swagger,postgresql,mongodb,redis,numpy,pandas,matplotlib,tensorflow,crewai,azure,aws,nginx,docker,kubernetes,helm,terraform,ansible,githubactions,jenkins,argocd,n8n,opentelemetry,prometheus,grafana,jaeger&perline=4" 
-            alt="My Skills"
-            className="block md:hidden"
-          />
-        </div>
-      </section>
+        {/* Hero Section */}
+        <section id="hero" className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center pt-10 md:pt-20">
+          <div className="space-y-6 order-2 lg:order-1 text-left">
+            <div className="flex items-center gap-2 text-indigo-400 animate-pulse">
+               <Radio className="w-4 h-4" />
+               <span className="text-sm font-mono tracking-widest uppercase">Incoming Transmission</span>
+            </div>
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-7xl text-white text-glow">
+              Hi 👋, I'm <br />
+              <span className="text-indigo-400">Melek BADREDDINE</span>
+            </h1>
+            <h2 className="text-2xl font-semibold text-indigo-200 sm:text-3xl font-mono">
+              Junior Computer Engineer | Cloud & DevOps Commander
+            </h2>
+            <p className="max-w-[600px] text-lg text-slate-300 sm:text-xl leading-relaxed">
+              🎓 Graduate of the National School of Engineers of Sfax (ENIS). <br/>
+              Mission: Architecting innovative Cloud, DevOps, and AI-driven systems.
+            </p>
+            <div className="flex flex-wrap items-center gap-4 pt-4">
+              <Button asChild size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white border-none shadow-lg shadow-indigo-500/20">
+                <Link href="#guestbook">Sign Mission Log <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild className="bg-transparent border-indigo-400 text-indigo-300 hover:bg-indigo-900/50 hover:text-white">
+                <Link href="https://github.com/melekbadreddine" target="_blank">
+                  <Github className="mr-2 h-4 w-4" /> GitHub Channel
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="secondary" className="bg-slate-800 text-white hover:bg-slate-700">
+                <a href="/Resume_Melek_BADREDDINE.pdf" download>
+                  Download Dossier
+                </a>
+              </Button>
+            </div>
+          </div>
+          
+          <div className="order-1 lg:order-2 flex justify-center lg:justify-end h-full w-full">
+            <Astronaut />
+          </div>
+        </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="space-y-6">
-        <div className="flex flex-col items-center space-y-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Professional Experience</h2>
-          <p className="max-w-[700px] text-muted-foreground">
-            My journey in the tech industry, featuring hands-on roles and impactful internships.
-          </p>
-        </div>
-        <div className="space-y-8">
-          {experience.map((job, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <Avatar className="h-12 w-12 border rounded-none">
-                      <AvatarImage src={`/logos/exp/${job.company.toLowerCase().replace(/ /g, "-")}.png`} alt={job.company} />
-                      <AvatarFallback className="font-bold">{job.logoFallback}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <CardTitle className="text-xl">{job.role}</CardTitle>
-                      <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                        <Building2 className="h-3 w-3" />
-                        <span>{job.company}</span>
-                        {job.type && <span>· {job.type}</span>}
+        {/* Tech Arsenal Section */}
+        <section id="skills" className="space-y-8">
+          <div className="flex flex-col items-center space-y-4 text-center">
+            <div className="inline-flex items-center justify-center p-3 bg-indigo-500/10 rounded-full mb-4 ring-1 ring-indigo-500/30">
+              <Cpu className="w-6 h-6 text-indigo-400" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-white">Tech Arsenal</h2>
+            <p className="max-w-[700px] text-slate-400">
+              Operational modules and technologies equipped for system deployment.
+            </p>
+          </div>
+          <div className="flex justify-center p-6 glass-panel rounded-xl overflow-hidden">
+            {/* Using Skill Icons API */}
+            <img 
+              src="https://go-skill-icons.vercel.app/api/icons?i=windows,linux,bash,popos,neovim,vscode,git,gitlab,jira,confluence,html,css,js,java,python,go,ts,nodejs,tailwind,angular,spring,swagger,postgresql,mongodb,redis,numpy,pandas,matplotlib,tensorflow,crewai,azure,aws,nginx,docker,kubernetes,helm,terraform,ansible,githubactions,jenkins,argocd,n8n,sonarqube,opentelemetry,prometheus,grafana,jaeger&perline=14" 
+              alt="My Skills"
+              className="hidden md:block opacity-90 hover:opacity-100 transition-opacity"
+            />
+             <img 
+              src="https://go-skill-icons.vercel.app/api/icons?i=windows,linux,bash,popos,neovim,vscode,git,gitlab,jira,confluence,html,css,js,java,python,go,ts,nodejs,tailwind,angular,spring,swagger,postgresql,mongodb,redis,numpy,pandas,matplotlib,tensorflow,crewai,azure,aws,nginx,docker,kubernetes,helm,terraform,ansible,githubactions,jenkins,argocd,n8n,opentelemetry,prometheus,grafana,jaeger&perline=6" 
+              alt="My Skills"
+              className="block md:hidden opacity-90 hover:opacity-100 transition-opacity"
+            />
+          </div>
+        </section>
+
+        {/* Mission Log (Experience) Section */}
+        <section id="experience" className="space-y-8">
+          <div className="flex flex-col items-center space-y-4 text-center">
+             <div className="inline-flex items-center justify-center p-3 bg-blue-500/10 rounded-full mb-4 ring-1 ring-blue-500/30">
+              <Rocket className="w-6 h-6 text-blue-400" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-white">Mission Log</h2>
+            <p className="max-w-[700px] text-slate-400">
+              Chronicle of professional deployments and operations.
+            </p>
+          </div>
+          <div className="space-y-8">
+            {experience.map((job, index) => (
+              <Card key={index} className="glass-card border-none text-slate-300">
+                <CardHeader>
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      <Avatar className="h-14 w-14 border-2 border-indigo-500/30 rounded-xl bg-black">
+                        <AvatarImage src={`/logos/exp/${job.company.toLowerCase().replace(/ /g, "-")}.png`} alt={job.company} className="object-contain p-1"/>
+                        <AvatarFallback className="font-bold bg-slate-800 text-indigo-400">{job.logoFallback}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <CardTitle className="text-xl text-white font-mono">{job.role}</CardTitle>
+                        <div className="flex items-center gap-2 text-sm font-medium text-indigo-300">
+                          <Building2 className="h-3 w-3" />
+                          <span>{job.company}</span>
+                          {job.type && <span className="bg-indigo-500/20 px-2 py-0.5 rounded-full text-xs">· {job.type}</span>}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col md:items-end gap-1 text-sm text-slate-500 pl-20 md:pl-0 font-mono">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        <span>{job.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                         <MapPin className="h-3 w-3" />
+                         <span>{job.location}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col md:items-end gap-1 text-sm text-muted-foreground pl-16 md:pl-0">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      <span>{job.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                       <MapPin className="h-3 w-3" />
-                       <span>{job.location}</span>
-                    </div>
+                </CardHeader>
+                <CardContent className="pl-6 md:pl-24">
+                  <ul className="list-disc list-outside space-y-2 text-sm text-slate-400 mb-6 marker:text-indigo-500">
+                    {job.description.map((desc, i) => (
+                      <li key={i}>{desc}</li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-wrap gap-2">
+                    {job.skills.map((skill) => (
+                      <span key={skill} className="inline-flex items-center rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-xs font-semibold text-indigo-300 transition-colors hover:bg-indigo-500/20">
+                        {skill}
+                      </span>
+                    ))}
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent className="pl-6 md:pl-24">
-                <ul className="list-disc list-outside space-y-2 text-sm text-muted-foreground mb-6">
-                  {job.description.map((desc, i) => (
-                    <li key={i}>{desc}</li>
-                  ))}
-                </ul>
-                <div className="flex flex-wrap gap-2">
-                  {job.skills.map((skill) => (
-                    <span key={skill} className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="space-y-6">
-        <div className="flex flex-col items-center space-y-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Featured Projects</h2>
-          <p className="max-w-[700px] text-muted-foreground">
-            A selection of my work in DevOps, Cloud Engineering, and Software Development.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <ProjectCard
-            title="AWS Infrastructure Automation and CI/CD Pipeline"
-            description={[
-              "Automated the provisioning of a complete AWS infrastructure using Terraform and Ansible",
-              "Implemented remote Terraform state management using Amazon S3 with DynamoDB state locking",
-              "Built a CI/CD pipeline with Jenkins to automate build, test, and deployment workflows",
-              "Managed container images using Amazon ECR and deployed applications on EC2 instances",
-            ]}
-            tags={["Terraform", "Ansible", "Docker Compose", "Jenkins", "AWS IAM", "VPC", "EC2", "S3", "RDS", "ECR", "DynamoDB"]}
-          />
-          <ProjectCard
-            title="Microservices Deployment and Service Mesh with Istio"
-            description={[
-              "Deployed a microservices-based architecture on Kubernetes with Istio service mesh integration",
-              "Managed and observed service-to-service communication, traffic flow, and latency",
-              "Monitored system performance and service dependencies using Kiali, Jaeger, and Grafana",
-              "Implemented GitOps-based deployments using ArgoCD",
-            ]}
-            tags={["Kubernetes", "Istio", "ArgoCD", "Kiali", "Jaeger", "Grafana"]}
-          />
-          <ProjectCard
-            title="DevOps Capstone Project (Coursera)"
-            description={[
-              "Developed RESTful APIs using Flask, applying Test-Driven Development (TDD) principles",
-              "Containerized the application and deployed it on OpenShift (Kubernetes)",
-              "Built CI/CD pipelines using GitHub Actions and Tekton to automate testing and deployment",
-              "Applied Agile/Kanban practices for task tracking and delivery",
-            ]}
-            tags={["Flask", "GitHub Actions", "Docker", "OpenShift", "Tekton", "Kanban"]}
-          />
-          <ProjectCard
-            title="Laboratory Management Microservices Application"
-            description={[
-              "Designed and implemented a distributed microservices architecture with service discovery via Eureka",
-              "Implemented secure authentication and authorization using OAuth 2.0 and JWT",
-              "Containerized and deployed services using Docker",
-              "Developed an Angular front-end for real-time data management and visualization",
-            ]}
-            tags={["Spring Boot", "Angular", "TypeScript", "PostgreSQL", "Firebase", "Eureka", "JWT", "OAuth 2.0", "Docker"]}
-          />
-          <ProjectCard
-            title="Hybrid Windows & Linux Network Administration"
-            description={[
-              "Virtualized Windows and Linux servers using VMware",
-              "Configured Active Directory, DNS, and DHCP in a Windows Server environment",
-              "Designed and secured the network using pfSense, including NAT rules and network segmentation",
-              "Implemented file sharing and access control between Windows and Linux systems using Samba",
-            ]}
-            tags={["VMware", "Windows Server", "Active Directory", "DHCP", "DNS", "Ubuntu", "Samba", "pfSense"]}
-          />
-          <ProjectCard
-            title="IoT System Implementation with Node-RED and MQTT"
-            description={[
-              "Built a basic IoT system using Node-RED to connect devices and services",
-              "Implemented real-time messaging using the MQTT protocol with a Mosquitto broker",
-              "Stored and visualized data in Firebase and Node-RED dashboards",
-              "Tested IoT APIs and data flows using Postman",
-            ]}
-            tags={["Node-RED", "MQTT", "Mosquitto", "Firebase", "JavaScript", "Postman"]}
-          />
-        </div>
-      </section>
-
-      {/* Education Section */}
-      <section id="education" className="space-y-6">
-        <div className="flex flex-col items-center space-y-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Education</h2>
-             <p className="max-w-[700px] text-muted-foreground">
-                Academic background and qualifications.
-            </p>
-        </div>
-         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {education.map((edu, index) => (
-                <Card key={index} className="flex flex-col">
-                    <CardHeader>
-                        <div className="flex items-center gap-4">
-                            <Avatar className="h-12 w-12 border rounded-none">
-                                <AvatarImage src={`/logos/edu/${edu.logoFallback.toLowerCase()}.png`} alt={edu.school} />
-                                <AvatarFallback className="font-bold">{edu.logoFallback}</AvatarFallback>
-                            </Avatar>
-                            <div>
-                                <CardTitle className="text-lg">{edu.school}</CardTitle>
-                                <p className="text-sm text-muted-foreground">{edu.degree}</p>
-                            </div>
-                        </div>
-                    </CardHeader>
-                    <CardContent className="flex-1 space-y-4">
-                        <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                             <div className="flex items-center gap-2">
-                                <Calendar className="h-4 w-4" />
-                                <span>{edu.duration}</span>
-                            </div>
-                             <div className="flex items-center gap-2">
-                                <MapPin className="h-4 w-4" />
-                                <span>{edu.location}</span>
-                            </div>
-                            {edu.details && (
-                                <div className="flex items-center gap-2">
-                                    <GraduationCap className="h-4 w-4" />
-                                    <span>{edu.details}</span>
-                                </div>
-                            )}
-                        </div>
-                        {edu.coursework && (
-                            <div className="text-sm text-muted-foreground">
-                                <span className="font-semibold">Relevant Coursework:</span> {edu.coursework}
-                            </div>
-                        )}
-                    </CardContent>
-                </Card>
+                </CardContent>
+              </Card>
             ))}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Extracurricular Section */}
-       <section id="activities" className="space-y-6">
-        <div className="flex flex-col items-center space-y-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Extracurricular Activities</h2>
-            <p className="max-w-[700px] text-muted-foreground">
-                Leadership, volunteering, and community involvement.
+        {/* Deployed Systems (Projects) Section */}
+        <section id="projects" className="space-y-8">
+          <div className="flex flex-col items-center space-y-4 text-center">
+             <div className="inline-flex items-center justify-center p-3 bg-purple-500/10 rounded-full mb-4 ring-1 ring-purple-500/30">
+              <Terminal className="w-6 h-6 text-purple-400" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-white">Deployed Systems</h2>
+            <p className="max-w-[700px] text-slate-400">
+              A gallery of successful engineering launches and software artifacts.
             </p>
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <ProjectCard
+              title="AWS Infrastructure Automation & CI/CD Pipeline"
+              description={[
+                "Automated AWS infrastructure provisioning (Terraform, Ansible).",
+                "Remote state management via S3 & DynamoDB.",
+                "Jenkins CI/CD pipeline for build/test/deploy automation.",
+                "Container management with ECR & EC2 deployments.",
+              ]}
+              tags={["Terraform", "Ansible", "Docker", "Jenkins", "AWS", "S3", "RDS"]}
+            />
+            <ProjectCard
+              title="Microservices Mesh with Istio"
+              description={[
+                "Deployed microservices on Kubernetes with Istio.",
+                "Managed traffic flow, latency, and service communication.",
+                "Observability via Kiali, Jaeger, and Grafana.",
+                "GitOps deployment strategy using ArgoCD.",
+              ]}
+              tags={["Kubernetes", "Istio", "ArgoCD", "Kiali", "Grafana"]}
+            />
+            <ProjectCard
+              title="DevOps Capstone (Coursera)"
+              description={[
+                "Developed TDD Flask APIs.",
+                "Deployed containerized app on OpenShift.",
+                "GitHub Actions & Tekton CI/CD pipelines.",
+                "Agile/Kanban project management.",
+              ]}
+              tags={["Flask", "GitHub Actions", "Docker", "OpenShift", "Tekton"]}
+            />
+            <ProjectCard
+              title="Lab Management Microservices"
+              description={[
+                "Distributed architecture with Eureka service discovery.",
+                "OAuth 2.0 & JWT security implementation.",
+                "Dockerized services with Angular frontend.",
+              ]}
+              tags={["Spring Boot", "Angular", "PostgreSQL", "Eureka", "Docker"]}
+            />
+            <ProjectCard
+              title="Hybrid Network Administration"
+              description={[
+                "Virtualized Windows/Linux servers (VMware).",
+                "Configured AD, DNS, DHCP, and Samba.",
+                "Network security via pfSense & NAT.",
+              ]}
+              tags={["VMware", "Win Server", "Linux", "Samba", "pfSense"]}
+            />
+            <ProjectCard
+              title="IoT System (Node-RED & MQTT)"
+              description={[
+                "IoT connectivity via Node-RED.",
+                "Real-time messaging with MQTT (Mosquitto).",
+                "Firebase storage & dashboard visualization.",
+              ]}
+              tags={["Node-RED", "MQTT", "Firebase", "JS"]}
+            />
+          </div>
+        </section>
+
+        {/* Training Academy (Education) Section */}
+        <section id="education" className="space-y-8">
+          <div className="flex flex-col items-center space-y-4 text-center">
+             <div className="inline-flex items-center justify-center p-3 bg-emerald-500/10 rounded-full mb-4 ring-1 ring-emerald-500/30">
+              <GraduationCap className="w-6 h-6 text-emerald-400" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-white">Training Academy</h2>
+             <p className="max-w-[700px] text-slate-400">
+                Academic credentials and theoretical foundations.
+            </p>
+          </div>
+           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {education.map((edu, index) => (
+                  <Card key={index} className="flex flex-col glass-card border-none">
+                      <CardHeader>
+                          <div className="flex items-center gap-4">
+                              <Avatar className="h-14 w-14 border-2 border-emerald-500/30 rounded-xl bg-white">
+                                  <AvatarImage src={`/logos/edu/${edu.logoFallback.toLowerCase()}.png`} alt={edu.school} className="object-contain p-1" />
+                                  <AvatarFallback className="font-bold text-emerald-600">{edu.logoFallback}</AvatarFallback>
+                              </Avatar>
+                              <div>
+                                  <CardTitle className="text-lg text-white">{edu.school}</CardTitle>
+                                  <p className="text-sm text-emerald-400">{edu.degree}</p>
+                              </div>
+                          </div>
+                      </CardHeader>
+                      <CardContent className="flex-1 space-y-4">
+                          <div className="flex flex-col gap-2 text-sm text-slate-400">
+                               <div className="flex items-center gap-2">
+                                  <Calendar className="h-4 w-4 text-emerald-500" />
+                                  <span>{edu.duration}</span>
+                              </div>
+                               <div className="flex items-center gap-2">
+                                  <MapPin className="h-4 w-4 text-emerald-500" />
+                                  <span>{edu.location}</span>
+                              </div>
+                              {edu.details && (
+                                  <div className="flex items-center gap-2">
+                                      <GraduationCap className="h-4 w-4 text-emerald-500" />
+                                      <span>{edu.details}</span>
+                                  </div>
+                              )}
+                          </div>
+                          {edu.coursework && (
+                              <div className="text-sm text-slate-500 border-t border-white/5 pt-4 mt-2">
+                                  <span className="font-semibold text-emerald-400">Relevant Coursework:</span> {edu.coursework}
+                              </div>
+                          )}
+                      </CardContent>
+                  </Card>
+              ))}
+          </div>
+        </section>
+
+        {/* Side Missions (Activities) Section */}
+         <section id="activities" className="space-y-8">
+          <div className="flex flex-col items-center space-y-4 text-center">
+             <div className="inline-flex items-center justify-center p-3 bg-yellow-500/10 rounded-full mb-4 ring-1 ring-yellow-500/30">
+              <Trophy className="w-6 h-6 text-yellow-400" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-white">Side Missions</h2>
+            <p className="max-w-[700px] text-slate-400">
+                Community engagement and extra-vehicular activities.
+            </p>
+          </div>
+           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {activities.map((activity, index) => (
+                  <Card key={index} className="flex flex-col glass-card border-none">
+                       <CardHeader>
+                          <div className="flex items-center gap-3">
+                               <Trophy className="h-5 w-5 text-yellow-500" />
+                               <CardTitle className="text-lg text-white">{activity.role}</CardTitle>
+                          </div>
+                       </CardHeader>
+                       <CardContent className="flex-1 space-y-2">
+                          <p className="font-medium text-yellow-100">{activity.organization}</p>
+                          <div className="flex items-center gap-2 text-xs text-slate-500">
+                              <Calendar className="h-3 w-3" />
+                              <span>{activity.duration}</span>
+                          </div>
+                           <div className="flex items-center gap-2 text-xs text-slate-500">
+                              <MapPin className="h-3 w-3" />
+                              <span>{activity.location}</span>
+                          </div>
+                          {activity.description && (
+                              <p className="text-sm text-slate-400 mt-2 border-t border-white/5 pt-2">{activity.description}</p>
+                          )}
+                       </CardContent>
+                  </Card>
+              ))}
+          </div>
+        </section>
+
+        {/* Guestbook Section */}
+        <div className="glass-panel rounded-3xl p-6 md:p-10">
+          <GuestbookSection session={session} entries={entries} />
         </div>
-         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {activities.map((activity, index) => (
-                <Card key={index} className="flex flex-col">
-                     <CardHeader>
-                        <div className="flex items-center gap-2">
-                             <Trophy className="h-5 w-5 text-yellow-500" />
-                             <CardTitle className="text-lg">{activity.role}</CardTitle>
-                        </div>
-                     </CardHeader>
-                     <CardContent className="flex-1 space-y-2">
-                        <p className="font-medium">{activity.organization}</p>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <Calendar className="h-3 w-3" />
-                            <span>{activity.duration}</span>
-                        </div>
-                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <MapPin className="h-3 w-3" />
-                            <span>{activity.location}</span>
-                        </div>
-                        {activity.description && (
-                            <p className="text-sm text-muted-foreground mt-2">{activity.description}</p>
-                        )}
-                     </CardContent>
-                </Card>
-            ))}
-        </div>
-      </section>
+      </div>
     </div>
   )
 }
 
 function ProjectCard({ title, description, tags }: { title: string, description: string[], tags: string[] }) {
   return (
-    <Card className="flex flex-col h-full hover:shadow-lg transition-shadow">
+    <Card className="flex flex-col h-full glass-card border-none hover:bg-white/10 transition-colors group">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="text-white group-hover:text-indigo-300 transition-colors">{title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-1">
-        <ul className="list-disc list-inside text-sm text-muted-foreground">
+        <ul className="list-disc list-inside text-sm text-slate-400 mb-6 marker:text-indigo-500">
           {description.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
-        <div className="flex flex-wrap gap-2 mt-4">
+        <div className="flex flex-wrap gap-2 mt-auto">
           {tags.map((tag) => (
-            <span key={tag} className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+            <span key={tag} className="inline-flex items-center rounded-md border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-semibold text-slate-300 transition-colors group-hover:border-indigo-500/50 group-hover:text-indigo-200">
               {tag}
             </span>
           ))}

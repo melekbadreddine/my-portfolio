@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/navbar";
+import { ToyNavbar } from "@/components/toy-navbar";
 import { Footer } from "@/components/footer";
 import { SessionProvider } from "@/components/session-provider";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Melek BADREDDINE | Portfolio",
@@ -27,12 +28,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-white`}
+        className={`antialiased min-h-screen flex flex-col`}
       >
         <SessionProvider>
           <ThemeProvider>
-            <Navbar />
+            {/* Top Logo */}
+            <header className="fixed top-0 left-0 right-0 p-6 z-40 pointer-events-none">
+              <Link href="/" className="pointer-events-auto inline-block font-black text-2xl tracking-tighter text-indigo-600 dark:text-white drop-shadow-lg hover:scale-105 transition-transform">
+                MB.
+              </Link>
+            </header>
+
             <main className="flex-1">{children}</main>
+            <ToyNavbar />
             <Footer />
           </ThemeProvider>
         </SessionProvider>

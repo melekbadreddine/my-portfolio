@@ -1,32 +1,24 @@
-import { auth, signIn } from "@/lib/auth"
-import { db } from "@/lib/db"
 import { GuestbookForm } from "@/components/guestbook/guestbook-form"
-import { deleteGuestbookEntry } from "@/app/actions/guestbook"
 import { DeleteButton } from "@/components/guestbook/delete-button"
+import { deleteGuestbookEntry } from "@/app/actions/guestbook"
+import { signIn } from "@/lib/auth"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Github } from "lucide-react"
+import { Session } from "next-auth"
 
-export const dynamic = "force-dynamic"
+interface GuestbookSectionProps {
+  session: Session | null
+  entries: any[]
+}
 
-export default async function GuestbookPage() {
-  const session = await auth()
-  
-  const entries = await db.guestbookEntry.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    include: {
-      user: true,
-    },
-  })
-
+export function GuestbookSection({ session, entries }: GuestbookSectionProps) {
   return (
-    <div className="container py-10 max-w-4xl">
-      <div className="flex flex-col items-center text-center space-y-4 mb-10">
-        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl">Guestbook</h1>
-        <p className="text-muted-foreground max-w-[600px]">
+    <section id="guestbook" className="space-y-6">
+      <div className="flex flex-col items-center text-center space-y-4">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-foreground dark:text-white">Guestbook</h2>
+        <p className="max-w-[700px] text-muted-foreground dark:text-slate-400">
           Leave a comment, feedback, or just say hello!
         </p>
       </div>
@@ -98,6 +90,6 @@ export default async function GuestbookPage() {
           <p className="text-center text-muted-foreground py-10">No entries yet. Be the first!</p>
         )}
       </div>
-    </div>
+    </section>
   )
 }

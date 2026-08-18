@@ -1,0 +1,1 @@
+export function Footer() { return <footer className="section-shell flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 py-7 font-mono text-xs text-slate-600"><span>© {new Date().getFullYear()} Melek BADREDDINE</span><span>Cloud-native infrastructure &amp; reliability</span></footer>; }

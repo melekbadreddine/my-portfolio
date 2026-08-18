@@ -1,0 +1,7 @@
+"use client";
+import { useState } from "react";
+
+const systems = [
+  ["Developer", "Git · GitHub · GitLab"], ["CI/CD", "GitHub Actions · GitLab CI/CD · Jenkins · Tekton"], ["Security", "Trivy · Falco · SonarQube"], ["Container Registry", "Docker · ECR · Container images"], ["Kubernetes", "Docker · Helm · ArgoCD · Terraform"], ["Application", "Spring Boot · Flask · Angular · Flutter"], ["Observability", "OpenTelemetry · Prometheus · Grafana · Loki · Tempo"],
+];
+export function EngineeringMap() { const [selected, setSelected] = useState(4); return <div className="surface mt-12 rounded-lg p-5 sm:p-7"><div className="grid gap-5 lg:grid-cols-[.75fr_1.25fr]"><div><p className="font-mono text-xs text-slate-500">SYSTEM FLOW / INTERACTIVE</p><div className="mt-5 flex flex-wrap gap-2">{systems.map(([name], index) => <button onClick={() => setSelected(index)} className={`rounded border px-3 py-2 text-left text-sm transition focus-visible:outline-2 focus-visible:outline-cyan-300 ${selected === index ? "border-cyan-300/60 bg-cyan-300/10 text-cyan-100" : "border-slate-700 text-slate-400 hover:text-white"}`} key={name}>{name}</button>)}</div></div><div className="rounded border border-slate-700 bg-[#080b12] p-6"><p className="font-mono text-xs text-cyan-300">{String(selected + 1).padStart(2, "0")} / {systems[selected][0]}</p><p className="mt-5 text-lg leading-8 text-slate-200">{systems[selected][1]}</p><p className="mt-6 font-mono text-xs text-slate-500">Click a system component to inspect its engineering context.</p></div></div></div>; }
